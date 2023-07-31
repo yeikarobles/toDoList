@@ -6,62 +6,64 @@ const wrapper = document.getElementById("wrapper");
 const cosasAgregadas = document.getElementById("cosasAgregadas");
 const addBtn = document.getElementById("addBtn");
 
-//boton para agregar thing to do
+let contador = 0;
+
+//agregar thing to do
 addBtn.addEventListener("click", () => {
-  //necesito hacer un validador de texto!
+  //validador
   if (cosasAgregadas.value === "") {
     return;
   }
 
   enlistar();
-  nuevoElemento();
+  crearElemento(contador);
+  contador++;
   cosasAgregadas.value = "";
 });
 
-//agregar elemento a lista
+//agregar thing to do a lista
 function enlistar() {
   lista.push(cosasAgregadas.value);
 }
 
-//crear nuevo elemento:
-function nuevoElemento() {
-  //creando checkbox + to do
-  let contenedor = document.createElement("div");
-  let listo = document.createElement("input");
+//crear nuevo elemento
+function crearElemento(identificador) {
+  let contenedor = document.createElement("div"); //contenedor
+  contenedor.setAttribute("id", identificador); //asignando id
+  console.log(contenedor);
+
+  let listo = document.createElement("input"); //checkbox
   listo.setAttribute("type", "checkbox");
-  let elemento = document.createElement("p");
 
-  elemento.innerHTML = cosasAgregadas.value;
+  let elemento = document.createElement("input"); //caja de texto
+  elemento.setAttribute("type", "text");
+  elemento.setAttribute("readonly", true);
+  elemento.value = cosasAgregadas.value;
 
-  //creando botones
-  let btnEdit = document.createElement("button");
+  let btnEdit = document.createElement("button"); //creando botones editar, eliminar
   let btnDelete = document.createElement("button");
-  //e iconos
-  let iEdit = document.createElement("i");
+  let iEdit = document.createElement("i"); //iconos
   let iDelete = document.createElement("i");
   iEdit.className = "fa-solid fa-pen-to-square";
   iDelete.className = "fa-solid fa-xmark";
-  //iconos dentro de botones:
   btnEdit.appendChild(iEdit);
   btnDelete.appendChild(iDelete);
 
-  // div para los botones
-  let wrapper = document.createElement("div");
-
+  let wrapper = document.createElement("div"); // contenedor para botones
   wrapper.appendChild(btnEdit);
   wrapper.appendChild(btnDelete);
 
-  //donde deben estar los elementos en el html
-  contenedor.appendChild(listo);
+  contenedor.appendChild(listo); //putting all together
   contenedor.appendChild(elemento);
   elementoss.appendChild(contenedor);
   elementoss.appendChild(wrapper);
 }
 
 //eliminar objetos de la lista
+function eliminar() {}
+
 //editar algun objeto de la lista
 
 function editar() {}
-function eliminar() {}
 
 //funcion para eliminar todos los objetos de la lista
