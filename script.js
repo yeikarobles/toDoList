@@ -42,28 +42,46 @@ function crearElemento(identificador) {
 
   let btnEdit = document.createElement("button"); //creando botones editar, eliminar
   let btnDelete = document.createElement("button");
-  let iEdit = document.createElement("i"); //iconos
-  let iDelete = document.createElement("i");
-  iEdit.className = "fa-solid fa-pen-to-square";
-  iDelete.className = "fa-solid fa-xmark";
-  btnEdit.appendChild(iEdit);
-  btnDelete.appendChild(iDelete);
+
+  btnEdit.className = "fa-solid fa-pen-to-square";
+  btnDelete.className = "fa-solid fa-xmark";
+
+  btnDelete.addEventListener("click", () => {
+    eliminar(identificador);
+  });
+
+  btnEdit.addEventListener("click", () => {
+    editar(identificador);
+  });
 
   let wrapper = document.createElement("div"); // contenedor para botones
   wrapper.appendChild(btnEdit);
   wrapper.appendChild(btnDelete);
 
-  contenedor.appendChild(listo); //putting all together
+  contenedor.appendChild(listo); //putting all together?dsfaf
   contenedor.appendChild(elemento);
+  contenedor.appendChild(wrapper);
   elementoss.appendChild(contenedor);
-  elementoss.appendChild(wrapper);
 }
 
-//eliminar objetos de la lista
-function eliminar() {}
+//crear funcion eliminar
+function eliminar(id) {
+  const elemento = document.getElementById(id);
+  elemento.remove(id);
+}
 
-//editar algun objeto de la lista
+//crear funcion editar
+function editar(id) {
+  const elemento = document.getElementById(id);
+  let textIn = elemento.childNodes[1];
+  let divI = elemento.childNodes[2];
+  let editI = divI.childNodes[0];
 
-function editar() {}
+  textIn.readOnly = !textIn.readOnly;
+
+  editI.className = textIn.readOnly
+    ? "fa-solid fa-pen-to-square"
+    : "fa-solid fa-check";
+}
 
 //funcion para eliminar todos los objetos de la lista
